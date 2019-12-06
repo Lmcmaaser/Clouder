@@ -1,17 +1,18 @@
 'use strict';
 // example request: url 'https://api.twitter.com/1.1/search/tweets.json?q=from%3Atwitterdev&result_type=mixed&count=2'
 // put your own value below!
-const apiKey = ''; 
+const apiKey = 'vf0nBrCd45B2RNaRqaA4T7HIj'; 
 const baseUrl = 'https://api.twitter.com/1.1/search/tweets.json';
 
 function eventSubmit() {
-    $('form').submit(event => {
-      event.preventDefault();
-      console.log('submitEvent ran');
-      const searchInput = $('#js-search-input').val();
-      const maxResults = $('#js-max').val();
-      getParks(searchInput, maxResults);
-    });
+  $('form').submit(event => {
+    event.preventDefault();
+    console.log('submitEvent ran');
+    const query = $('#js-query').val();
+    const amount = $('#js-amount').val();
+    const type = $('input:checked').val();
+    getParks(query, type, amount);
+  });
 }
 
 function formatParams(params) {
@@ -20,7 +21,7 @@ function formatParams(params) {
   return queryParams.join('&');
 }
 
-function getParks(searchInput, maxResults) {
+function getParks(query, type, amount) {
     const params = {
       q: query,
       result_type: type,
